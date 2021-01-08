@@ -1,0 +1,24 @@
+{
+  "name": "usersapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Teodora",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "http": "0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.10",
+    "nvm": "0.0.4",
+    "router": "^1.3.5"
+  }
+}

@@ -1,0 +1,5 @@
+{
+    "git.scanRepositories": [
+        "https://github.com/teodora-mladenovic/usersapp.git"
+    ]
+}

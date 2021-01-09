@@ -10,7 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ProfileComponent } from './profile/profile.component';
-import { AdminComponent } from './admin/admin.component';
+import { LoginadminComponent } from './loginadmin/loginadmin.component';
 
 
 
@@ -22,8 +22,7 @@ import { AdminComponent } from './admin/admin.component';
     RegisterComponent,
     LoginComponent,
     ProfileComponent,
-    ProfileComponent,
-    AdminComponent
+    LoginadminComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +33,7 @@ import { AdminComponent } from './admin/admin.component';
       {path: 'register', component: RegisterComponent},
       {path: 'login', component: LoginComponent},
       {path: 'profile', component: ProfileComponent},
-      {path: 'admin', component: AdminComponent}
+      {path: 'loginadmin', component: LoginadminComponent}
     ])
   ],
   providers: [],

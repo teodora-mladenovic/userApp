@@ -15,6 +15,10 @@ export class UserService {
     return this.http.post(this.baseUrl + '/login', data, { observe: 'response' });
   }
 
+  loginadmin(data: Object): Observable<HttpResponse<Object>> {
+    return this.http.post(this.baseUrl + '/loginAdmin', data, { observe: 'response' });
+  }
+
   register(data: Object): Observable<Object> {
     return this.http.post(this.baseUrl + '/register', data);
   }

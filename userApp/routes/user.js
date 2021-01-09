@@ -19,16 +19,16 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
     const id = req.params.id;
-    
-    User.findOne({ _id: id}).exec(function(err, user){
-            if (user){
-            res.status(200).json({'users': user});
-            }
-            else {
-                res.status(500).json({ 'message': 'Internal server error', 'error': err });
-            }
-          });
-           
+
+    User.findOne({ _id: id }).exec(function (err, user) {
+        if (user) {
+            res.status(200).json({ 'users': user });
+        }
+        else {
+            res.status(500).json({ 'message': 'Internal server error', 'error': err });
+        }
+    });
+
 
 });
 
@@ -38,7 +38,7 @@ router.get('/:id', (req, res, next) => {
 
 
 router.post('/register', (req, res, next) => {
-    
+
     const email = req.body.email || "";
     const password = req.body.password;
     const password2 = req.body.password2;
@@ -115,20 +115,20 @@ router.post('/login', (req, res, next) => {
                     else {
                         updatedLoginCount = user.loginCount + 1;
                         myquery = { email: user.email };
-                        newvalues = { $set: { loginCount: updatedLoginCount} };
-                        
-                        User.updateOne(myquery, newvalues, function (err, result) { 
-                           //console.log(user.loginCount);
+                        newvalues = { $set: { loginCount: updatedLoginCount } };
+
+                        User.updateOne(myquery, newvalues, function (err, result) {
+                            //console.log(user.loginCount);
                         });
 
-                        
+
 
                         var token = jwt.sign({ id: user._id }, config.secret, {
                             expiresIn: 86400 // expires in 24 hours
                         });
 
                         res.status(200).json({
-                             user:
+                            user:
                             {
                                 _id: user._id,
                                 email: user.email,
@@ -141,13 +141,79 @@ router.post('/login', (req, res, next) => {
                     }
 
                 });
-            } 
+            }
             else {
                 res.status(500).json({ 'message': 'There is no user with this email' });
-            } 
+            }
         });
     }
-    
+
+
+
+});
+
+router.post('/loginAdmin', (req, res, next) => {
+    const email = req.body.email || "";
+    const password = req.body.password || "";
+    const userEmail = req.body.userEmail || "";
+    if (email == "" || password == "") {
+        if (email == "") {
+            res.status(500).json({ 'message': 'Enter your email address' });
+        } if (userEmail == "") {
+            res.status(500).json({ 'message': 'Enter users email address' });
+        }
+        else {
+            res.status(500).json({ 'message': 'Enter your password' });
+        }
+    } else {
+
+        User.findOne({ email: email }).exec(function (err, user) {
+            if (user) {
+                if (user.isAdmin == true) {
+                    bcrypt.compare(password, user.password, (err, result) => {
+                        if (!result) {
+                            res.status(500).json({ message: 'incorrect password', error: err });
+                        }
+                        else {
+                            User.findOne({ email: userEmail }).exec(function (err, user) {
+                                if (user) {
+
+                    
+                                            var token = jwt.sign({ id: user._id }, config.secret, {
+                                                expiresIn: 86400 // expires in 24 hours
+                                            });
+                    
+                                            res.status(200).json({
+                                                user:
+                                                {
+                                                    _id: user._id,
+                                                    email: user.email,
+                                                    loginCount: user.loginCount,
+                                                    isAdmin: user.isAdmin
+                                                }
+                                            });
+                    
+                    
+                                    
+                                }
+                                else {
+                                    res.status(500).json({ 'message': 'There is no user with this email' });
+                                }
+                            });
+
+                        }
+
+                    });
+                } else {
+                    res.status(500).json({ 'message': 'You are not admin' });
+                }
+            }
+            else {
+                res.status(500).json({ 'message': 'There is no user with this email' });
+            }
+        });
+    }
+
 
 
 });

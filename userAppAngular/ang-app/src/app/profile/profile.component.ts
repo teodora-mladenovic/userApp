@@ -34,14 +34,7 @@ export class ProfileComponent implements OnInit {
   }
 
 
-  adminMode(){
-    if(this.isAdmin){
-      this.router.navigate(['/admin']);
-    }
-    else{
-      alert("You are not admin");
-    }
-  }
+
 
   logout() {
     sessionStorage.removeItem('authorizedUser');

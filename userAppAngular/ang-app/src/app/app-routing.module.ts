@@ -3,14 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
-import { AdminComponent } from './admin/admin.component';
+
+import { LoginadminComponent } from './loginadmin/loginadmin.component';
 
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'admin', component: AdminComponent },
+  { path: 'loginadmin', component: LoginadminComponent },
   { path: '',   redirectTo: '/first-register', pathMatch: 'full' },
 ];
 

@@ -1,0 +1,20 @@
+<router-outlet></router-outlet>
+<div>
+    <form [formGroup]="loginadminForm" (ngSubmit)="onLoginadmin()">
+      <label>
+        Email: <input type="email" formControlName="email">
+      </label>
+      <br>
+      <label>
+        Password: <input type="password" formControlName="password">
+      </label>
+      <br>
+      <label>
+        User email: <input type="email" formControlName="userEmail">
+      </label>
+      <br>
+      <button type="submit">Admin login</button>
+      
+    </form>
+  </div>
+  
